@@ -58,7 +58,7 @@
             </div>
             <ul>
                 <h2>
-                    <li><a href="http://localhost:8080/escuela1/alumnos/listarAlumnos.php">Alumnos</a></li>
+                    <li><a href="http://localhost/Sportclub/Clientes/listarClientes.php">Clientes</a></li>
                 </h2>
                 <h2>
                     <li><a href="http://localhost:8080/escuela1/profesores/listarProfesor.php">Profesor</a></li>
