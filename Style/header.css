@@ -1,6 +1,6 @@
 /* Estilo para el contenedor del encabezado */
 header {
-    background-color: #000000;
+    background-color: rgb(136, 76, 76);
     display: flex;
     align-items: center;
     justify-content: space-between;
