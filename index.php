@@ -24,7 +24,7 @@
                 <div class="svg-container">
                     <svg width="80px" height="80px" viewBox="-2.4 -2.4 28.80 28.80" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
                         <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="0" fill="#2b8aaf" stroke-width="0" />
+                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="0" fill="#333" stroke-width="0" />
                         </g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
                         <g id="SVGRepo_iconCarrier">
@@ -43,7 +43,7 @@
                     <div class="svg-container">
                         <svg width="80px" height="80px" viewBox="-2.4 -2.4 28.80 28.80" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
                             <g id="SVGRepo_bgCarrier" stroke-width="0">
-                                <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="0" fill="#333" stroke-width="0" />
+                                <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="0" fill="#333  " stroke-width="0" />
                             </g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
                             <g id="SVGRepo_iconCarrier">
@@ -65,7 +65,7 @@
                 </h2>
             </ul>
             <div class="logo2">
-                <img src="Imagenes/sanmiguel.png" alt="Logo San Miguel">
+                <img src="Imagenes/SportClub.svg" alt="Logo Sportclub">
             </div>
         </nav>
     </header>
@@ -81,19 +81,19 @@
             <div class="social-media">
                 <h2>Redes sociales</h2>
                 <div class="social-item">
-                    <img src="images/instagram.png">
+                    <img src="imagenes/instagram.png">
                     <p>Instagram</p>
                 </div>
                 <div class="social-item">
-                    <img src="images/twitter.png">
+                    <img src="imagenes/twitter.png">
                     <p>Twitter</p>
                 </div>
                 <div class="social-item">
-                    <img src="images/youtube.png">
+                    <img src="imagenes/youtube.png">
                     <p>Youtube</p>
                 </div>
                 <div class="social-item">
-                    <img src="images/whatsapp.png">
+                    <img src="imagenes/whatsapp.png">
                     <p>Whatsapp</p>
                 </div>
             </div>
@@ -106,8 +106,7 @@
         </div>
         <div class="right-side">
             <div class="logo-container-footer">
-                <img class="logo-footer" src="images/logito.svg" alt="">
-                <p class="name-footer">SportClub</p>
+                <img class="logo-footer" src="Imagenes/SportClub.svg" alt="">
             </div>
             <div>
             <div class="info">
@@ -118,30 +117,5 @@
             </div>
         </div>
     </footer>
-
-    <style>
-        .query-container {
-            background-color: #ffffff;
-            border: 2px solid #2b8aaf;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            margin: 40px auto;
-        }
-
-        .query-container h2 {
-            color: #2b8aaf;
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .query-container p {
-            font-size: 1.2em;
-            color: #333333;
-            margin-bottom: 10px;
-        }
-    </style>
 </body>
 </html>
