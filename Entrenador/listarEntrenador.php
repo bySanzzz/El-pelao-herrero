@@ -29,7 +29,8 @@ $query = "
     LEFT JOIN 
         actividad 
     ON 
-        entrenador.dni = actividad.Dni_entrenador";
+        entrenador.id_actividad = actividad.id_actividad"; // Relación ajustada
+
 
 if (!empty($search)) {
     $query .= " WHERE 
@@ -70,6 +71,7 @@ $total_paginas = ceil($total_records / $limite);
 <head>
     <meta charset="UTF-8">
     <title>Listado Entrenadores</title>
+    <link rel="stylesheet" href="../Style/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -123,10 +125,10 @@ $total_paginas = ceil($total_records / $limite);
                         <td><?php echo $row['especialidad'] ? $row['especialidad'] : 'Sin actividad asignada'; ?></td>
                         <td><?php echo date('d-m-Y', strtotime($row['fecha_contrato'])); ?></td>
                         <td class="acciones">
-                            <a class="btn-accion" href="Form-Modi-Entrenadores.php?entrenador=<?php echo $row['dni']; ?>">
+                            <a class="btn-accion" href="Form-Modi-Entrenador.php?entrenador=<?php echo $row['dni']; ?>">
                                 <img src="../SVG/Perfil.svg" alt="Modificar" class="icono" width="24px">
                             </a>
-                            <form method="POST" action="Eliminar-Entrenadores.php" style="display:inline;">
+                            <form method="POST" action="Form-Eliminar-Entrenador.php" style="display:inline;">
                                 <input type="hidden" name="DNI" value="<?php echo $row['dni']; ?>">
                                 <button type="submit" class="btn-accion">
                                     <img src="../SVG/Eliminar.svg" alt="Eliminar" class="icono">
