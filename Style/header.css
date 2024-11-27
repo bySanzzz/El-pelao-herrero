@@ -1,6 +1,6 @@
 /* Estilo para el contenedor del encabezado */
 header {
-    background-color: #2b8aaf;
+    background-color: #000000;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -140,7 +140,7 @@ button {
 
 /* Ajustes de tabla */
 .table-sky-blue {
-    background-color: #269cca;
+    background-color: rgb(38, 38, 38);
     color: white;
     margin-left: 20px;
 }
@@ -194,7 +194,7 @@ button {
 }
 
 .volvido {
-    background-color: #2b8aaf;
+    background-color: rgb(38, 38, 38);
     color: white;
     padding: 10px 20px;
     text-align: center;
