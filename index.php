@@ -72,9 +72,8 @@
 
     <script src="../Sportclub/JavaScript/menu.js"></script>
 
-    <div class="query-container">
-        <h2>Resumen de Alumnos</h2>
-        <!-- Aquí puedes incluir contenido adicional de HTML o JavaScript en lugar del bloque PHP -->
+    <div class="fondo">
+        <img src="Imagenes/inicio.png" alt="fondo">
     </div>
     <footer>
         <div class="left-side">
