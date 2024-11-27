@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200px" height="200px">
+  <!-- Billetera -->
+  <rect x="10" y="30" width="80" height="40" rx="8" ry="8" fill="#6C4F3D" />
+  <!-- Cierre de la billetera -->
+  <circle cx="80" cy="50" r="3" fill="#D4A373" />
+  <!-- Detalle interior de la billetera -->
+  <rect x="15" y="35" width="40" height="25" rx="4" ry="4" fill="#A87C5B" />
+</svg>

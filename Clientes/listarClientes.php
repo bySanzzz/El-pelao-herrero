@@ -89,31 +89,47 @@ $total_paginas = ceil($total_records / $limite);
 
         <!-- Tabla de clientes -->
         <table class='table table-striped'>
-            <thead>
-                <tr>
-                    <th>DNI</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de Inscripción</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_array($result)) { ?>
-                    <tr>
-                        <td><?php echo $row['dni']; ?></td>
-                        <td><?php echo $row['nombre']; ?></td>
-                        <td><?php echo $row['apellido']; ?></td>
-                        <td><?php echo $row['correo']; ?></td>
-                        <td><?php echo $row['telefono']; ?></td>
-                        <td><?php echo date('d-m-Y', strtotime($row['fecha_inscripcion'])); ?></td>
-                        <td><?php echo $row['estado'] == 0 ? 'Activo' : 'Inactivo'; ?></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Fecha de Inscripción</th>
+            <th>Estado</th>
+            <th>Acciones</th> <!-- Nueva columna -->
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($row = mysqli_fetch_array($result)) { ?>
+            <tr>
+                <td><?php echo $row['dni']; ?></td>
+                <td><?php echo $row['nombre']; ?></td>
+                <td><?php echo $row['apellido']; ?></td>
+                <td><?php echo $row['correo']; ?></td>
+                <td><?php echo $row['telefono']; ?></td>
+                <td><?php echo date('d-m-Y', strtotime($row['fecha_inscripcion'])); ?></td>
+                <td><?php echo $row['estado'] == 0 ? 'Activo' : 'Inactivo'; ?></td>
+                <td class="acciones"> <!-- Botones de acciones -->
+                    <a class="btn-accion" href="Form-Modi-Clientes.php?cliente=<?php echo $row['dni']; ?>">
+                        <img src="../SVG/Perfil.svg" alt="Modificar" class="icono" width="24px">
+                    </a>
+                    <form method="POST" action="listar-delete-alumno.php" style="display:inline;">
+                        <input type="hidden" name="DNI" value="<?php echo $row['dni']; ?>">
+                        <button type="submit" class="btn-accion">
+                            <img src="../SVG/si.svg" alt="Eliminar" class="icono">
+                        </button>
+                    </form>
+                    <a class="btn-accion" href="vista-boletin.php?alumno=<?php echo $row['dni']; ?>">
+                        <img src="../SVG/cuota.svg" alt="Boletín" class="icono" width="24px">
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
 
         <!-- Paginación -->
         <nav>
