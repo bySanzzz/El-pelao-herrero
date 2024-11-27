@@ -1,6 +1,7 @@
 .fondo{
-    padding-right: 0px;
-    width: 1864px;
-    background-color: rgb(32,33,40);
+    display: flex;
+    width: 100vw; /* 100% del ancho de la ventana */
+    height: 100vh; /* 100% del alto de la ventana */
+    justify-content: space-between;
 }
 
