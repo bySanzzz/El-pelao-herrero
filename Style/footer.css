@@ -1,19 +1,23 @@
+/* Estilos para el footer */
 footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 300px;
+    height: auto; /* Cambiado de 300px a auto */
     background-color: #333;
     color: aliceblue;
-    width: 100vw; /* Ocupa el ancho completo de la pantalla */
-    object-fit: cover; /* Cubre toda la pantalla, recortando si es necesario */
+    padding: 20px; /* Añadido padding para que no quede pegado a los bordes */
+    flex-wrap: wrap; /* Permite que los elementos se acomoden cuando no haya suficiente espacio */
 }
 
+/* Ajustes en el lado izquierdo del footer */
 .left-side {
     display: flex;
-    margin-left: 20px;
+    flex-wrap: wrap;
+    margin-left: 10px; /* Ajustado para mayor flexibilidad */
 }
 
+/* Estilos para las redes sociales */
 .social-media {
     display: flex;
     flex-direction: column;
@@ -30,6 +34,7 @@ footer {
     margin-right: 30px;
 }
 
+/* Ajustes en la parte de soporte técnico */
 .technical-service {
     width: 250px;
 }
@@ -38,17 +43,12 @@ footer {
     margin-top: 12px;
 }
 
+/* Ajustes en el lado derecho del footer */
 .right-side {
-    
     margin-right: 20px;
     display: flex;
     flex-direction: column;
-}
-
-.logo-container-footer {
-    position: relative;
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap; /* Añadido para asegurar que los elementos se ajusten en pantallas pequeñas */
 }
 
 .logo-footer {
@@ -56,12 +56,7 @@ footer {
     margin-left: 70px;
 }
 
-.name-footer {
-    margin-left: 70px;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
+/* Estilo para los enlaces del footer */
 .info {
     margin-top: 50px;
     margin-left: 110px;
@@ -69,4 +64,27 @@ footer {
 
 .info > p {
     margin-top: 10px;
+}
+
+/* Responsividad para dispositivos pequeños */
+@media screen and (max-width: 767px) {
+    .left-side, .right-side {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-footer {
+        margin-left: 0;
+        height: 30px; /* Ajustado para pantallas pequeñas */
+    }
+
+    .social-item > img {
+        width: 30px; /* Reducción del tamaño de los iconos en pantallas pequeñas */
+        margin-right: 15px;
+    }
+
+    .info {
+        margin-left: 0;
+        margin-top: 20px;
+    }
 }
