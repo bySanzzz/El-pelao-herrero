@@ -166,3 +166,208 @@ $total_paginas = ceil($total_records / $limite);
     </script>
 </body>
 </html>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: rgb(32, 33, 40);
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    h1.text-center-titulo {
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .btn-accion {
+        background-color: rgb(32, 33, 40);
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: black;
+        text-decoration: none;
+    }
+
+    .btn-accion:hover {
+        background-color: rgb(51, 51, 60);
+    }
+
+    .icono {
+        width: 24px;
+        height: auto;
+    }
+
+    .container {
+        padding: 30px;
+    }
+
+    .form-select {
+        margin-top: 10px;
+        background-color: rgb(50, 50, 50);
+        color: white;
+        border: 1px solid #ccc;
+    }
+
+    .input-group-text {
+        background-color: rgb(50, 50, 50);
+        color: white;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: rgb(32, 33, 40);
+        border-color: rgb(32, 33, 40);
+        color: white;
+    }
+
+    .pagination .page-link {
+        color: rgb(32, 33, 40);
+        border: 1px solid rgb(32, 33, 40);
+    }
+
+    .pagination .page-item:hover .page-link {
+        background-color: rgb(51, 51, 60);
+        border-color: rgb(51, 51, 60);
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #fff;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: rgb(0,0,0)
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        color: black;
+    }
+
+    th {
+        background-color: rgb(32, 33, 40);
+        color: white;
+    }
+
+    td {
+        background-color: #f9f9f9;
+        color: black;
+    }
+
+    tr:nth-child(even) td {
+        color: rgb(0,0,0)
+    }
+
+    .acciones {
+        display: flex;
+        gap: 10px;
+    }
+
+    .acciones form {
+        margin: 0;
+    }
+
+    .acciones button {
+        background: none;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .acciones button:hover {
+        color: red;
+    }
+
+    .input-group input, .input-group button {
+        background-color: rgb(50, 50, 50);
+        color: black;
+        border: 1px solid #ccc;
+    }
+    /* Estilos para el campo de búsqueda */
+    #searchInput {
+        background-color: rgb(32, 33, 40); /* Fondo oscuro para el campo de búsqueda */
+        color: rgb(255, 255, 255); /* Texto en blanco brillante */
+        border: 1px solid rgb(60, 60, 60); /* Borde oscuro */
+    }
+
+    #searchInput::placeholder {
+        color: rgb(190, 190, 190); /* Placeholder en gris claro */
+    }
+
+    /* Estilo para el botón de búsqueda */
+    .input-group-text {
+        background-color: rgb(32, 33, 40); /* Fondo oscuro para el botón */
+        color: rgb(255, 255, 255); /* Texto en blanco brillante para el botón */
+        border: 1px solid rgb(60, 60, 60); /* Borde oscuro */
+    }
+
+    .input-group-text:hover {
+        background-color: #009688; /* Cambia de color cuando el botón es hover */
+    }
+        /* Estilos comunes para el campo de búsqueda y los selectores */
+        #searchInput, #orderSelect, #statusSelect {
+        background-color: rgb(32, 33, 40); /* Fondo oscuro */
+        color: rgb(255, 255, 255); /* Texto en blanco brillante */
+        border: 1px solid rgb(60, 60, 60); /* Borde gris oscuro */
+        padding: 0.375rem 0.75rem; /* Relleno para que se vea mejor */
+        font-size: 1rem; /* Tamaño de fuente adecuado */
+        border-radius: 0.375rem; /* Bordes redondeados */
+    }
+
+    /* Efecto hover para los selectores */
+    #orderSelect:hover, #statusSelect:hover, #searchInput:hover {
+        border-color: #009688; /* Color del borde al pasar el ratón */
+    }
+
+    /* Placeholder en el campo de búsqueda */
+    #searchInput::placeholder {
+        color: rgb(190, 190, 190); /* Placeholder en gris claro */
+    }
+
+    /* Estilo para el botón de búsqueda */
+    .input-group-text {
+        background-color: rgb(32, 33, 40); /* Fondo oscuro */
+        color: rgb(255, 255, 255); /* Texto en blanco brillante */
+        border: 1px solid rgb(60, 60, 60); /* Borde gris oscuro */
+    }
+
+    .input-group-text:hover {
+        background-color: #009688; /* Cambia de color cuando el botón es hover */
+    }
+    /* Estilo del botón de borrar */
+form button[type="submit"] {
+    background-color: rgb(32, 33, 40); /* Fondo oscuro */
+    color: rgb(255, 255, 255); /* Texto blanco brillante */
+    border: 1px solid rgb(60, 60, 60); /* Borde gris oscuro */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    cursor: pointer; /* Para cambiar el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Estilo del botón de borrar cuando está en foco o pasa el mouse */
+form button[type="submit"]:hover {
+    background-color: rgb(60, 60, 60); /* Fondo más oscuro al pasar el mouse */
+}
+
+form button[type="submit"]:focus {
+    outline: none; /* Elimina el borde de foco */
+    background-color: rgb(60, 60, 60); /* Fondo más oscuro al estar en foco */
+}
+/* Cambiar el color de las letras a negro en los controles de Bootstrap */
+select, input, .form-control, .form-select, .input-group-text {
+    color: rgb(0, 0, 0); /* Letras en negro */
+}
+
+</style>
