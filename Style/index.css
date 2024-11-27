@@ -1,7 +1,7 @@
 .fondo{
     display: flex;
-    width: 100vw; /* 100% del ancho de la ventana */
-    height: 100vh; /* 100% del alto de la ventana */
-    justify-content: space-between;
+    width: 100vw; /* Ocupa el ancho completo de la pantalla */
+    height: 100vh; /* Ocupa el alto completo de la pantalla */
+    object-fit: cover; /* Cubre toda la pantalla, recortando si es necesario */
 }
 
