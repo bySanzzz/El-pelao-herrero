@@ -37,7 +37,6 @@ $result_actividades = mysqli_query($conex, $query_actividades);
     <link rel="stylesheet" href="../Style/cards.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
     <style>
-        /* Agregar estilo adicional para mostrar los datos del cliente */
         .cliente-info {
             text-align: center;
             margin-bottom: 2em;
@@ -59,37 +58,40 @@ $result_actividades = mysqli_query($conex, $query_actividades);
 </section>
 
 <section class="product-list">
-    <?php
-    // Mostrar las actividades disponibles
+<?php
     if (mysqli_num_rows($result_actividades) > 0) {
-        while ($row = mysqli_fetch_assoc($result_actividades)) {
-            // Asignar la imagen manualmente según el nombre de la actividad
-            $imagen = '';
-            switch ($row['nombre']) {
-                case 'Crossfit':
-                    $imagen = '../Imagenes/Crossfit.jpeg';
-                    break;
-                case 'Yoga':
-                    $imagen = '../Imagenes/yoga.jpeg';
-                    break;
-                case 'Musculación':
-                    $imagen = '../Imagenes/musculacion.jpg';
-                    break;
-                default:
-                    $imagen = '../Imagenes/default.jpg';
-                    break;
-            }
+        while ($actividad = mysqli_fetch_assoc($result_actividades)) {
+            $imagen = match ($actividad['nombre']) {
+                'CrossFit' => '../Imagenes/Crossfit.jpeg',
+                'Yoga' => '../Imagenes/yoga.jpeg',
+                'Musculacion' => '../Imagenes/musculacion.jpg',
+                'Bodypump' => '../Imagenes/bodypump.jpg',
+                'Zumba' => '../Imagenes/zumba.jpg',
+                'Pilates' => '../Imagenes/pilates.jpg',
+                'Spinning' => '../Imagenes/spinning.jpg',
+                'Kickboxing' => '../Imagenes/Kickboxing.jpg',
+                'HIIT' => '../Imagenes/hiit.jpg',
+                'AquaGym' => '../Imagenes/aquagym.jpg',
+                default => '../Imagenes/default.jpg',
+            };
             ?>
             <div class="card">
-                <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $row['nombre']; ?>">
+                <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $actividad['nombre']; ?>">
                 <div class="card-info">
-                    <p class="card-name"><?php echo $row['nombre']; ?></p>
-                    <p class="card-desc"><?php echo $row['descripcion']; ?></p>
-                    <p class="card-duration">Duración: <?php echo $row['duracion']; ?> minutos</p>
-                    <p class="card-time">Hora de inicio: <?php echo $row['hora_inicio']; ?></p>
+                    <p class="card-name"><?php echo $actividad['nombre']; ?></p>
+                    <p class="card-desc"><?php echo $actividad['descripcion']; ?></p>
+                    <p class="card-duration">Duración: <?php echo $actividad['duracion']; ?> minutos</p>
+                    <p class="card-time">Hora de inicio: <?php echo $actividad['hora_inicio']; ?></p>
                     <form method="POST" action="registro.php">
-                        <input type="hidden" name="id_actividad" value="<?php echo $row['id_actividad']; ?>">
+                        <input type="hidden" name="id_actividad" value="<?php echo $actividad['id_actividad']; ?>">
                         <input type="hidden" name="dni_cliente" value="<?php echo $cliente['dni']; ?>">
+                        
+                        <label for="fecha_ingreso">Fecha de ingreso:</label>
+                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+
+                        <label for="hora_ingreso">Hora de ingreso:</label>
+                        <input type="time" id="hora_ingreso" name="hora_ingreso" required>
+                        
                         <button type="submit" class="btn-register">Registrarse</button>
                     </form>
                 </div>

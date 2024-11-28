@@ -2,9 +2,11 @@
 include('../conexion.php');
 
 // Verifica si se recibieron los datos del formulario
-if (isset($_POST['id_actividad']) && isset($_POST['dni_cliente'])) {
+if (isset($_POST['id_actividad']) && isset($_POST['dni_cliente']) && isset($_POST['fecha_ingreso']) && isset($_POST['hora_ingreso'])) {
     $id_actividad = $_POST['id_actividad'];
     $dni_cliente = $_POST['dni_cliente'];
+    $fecha_ingreso = $_POST['fecha_ingreso'];
+    $hora_ingreso = $_POST['hora_ingreso'];
 
     // Obtener el DNI del entrenador asignado a la actividad
     $query_entrenador = "SELECT dni FROM entrenador WHERE id_actividad = '$id_actividad' LIMIT 1";
@@ -15,9 +17,8 @@ if (isset($_POST['id_actividad']) && isset($_POST['dni_cliente'])) {
         $dni_entrenador = $entrenador['dni'];
 
         // Insertar los datos en la tabla entrenamiento
-        $fecha_actual = date('Y-m-d');
-        $query_insert = "INSERT INTO entrenamiento (dni_cliente, id_actividad, fecha, dni_entrenador) 
-                         VALUES ('$dni_cliente', '$id_actividad', '$fecha_actual', '$dni_entrenador')";
+        $query_insert = "INSERT INTO entrenamiento (dni_cliente, id_actividad, fecha, fecha_ingreso, hora_ingreso, dni_entrenador) 
+                         VALUES ('$dni_cliente', '$id_actividad', CURDATE(), '$fecha_ingreso', '$hora_ingreso', '$dni_entrenador')";
 
         if (mysqli_query($conex, $query_insert)) {
             echo "<script>
