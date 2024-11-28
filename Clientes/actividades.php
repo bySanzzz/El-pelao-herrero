@@ -1,173 +1,94 @@
+<?php
+include('../conexion.php'); // Conexión a la base de datos
+
+// Verificar si el DNI del cliente está presente en la URL
+if (isset($_GET['cliente'])) {
+    $dni_cliente = $_GET['cliente'];
+
+    // Consultar los datos del cliente
+    $query_cliente = "SELECT * FROM cliente WHERE dni = '$dni_cliente'";
+    $resultado_cliente = mysqli_query($conex, $query_cliente);
+
+    if (mysqli_num_rows($resultado_cliente) > 0) {
+        $cliente = mysqli_fetch_assoc($resultado_cliente);
+    } else {
+        echo "<script>
+                alert('No se encontró el cliente con el DNI proporcionado.');
+                window.location.href = 'listarClientes.php'; // Redirige si no hay cliente
+              </script>";
+        exit;
+    }
+} else {
+    echo "<script>
+            alert('No se proporcionó el DNI del cliente.');
+            window.location.href = 'listarClientes.php'; // Redirige si no hay parámetro
+          </script>";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Actividades</title>
+    <title>Actividades de <?php echo $cliente['nombre'] . ' ' . $cliente['apellido']; ?></title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/cards.css">
-    <!-- Agrega tu estilo personalizado aquí -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 1em 0;
-            text-align: center;
-        }
-        .product-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5em;
-            margin: 2em auto;
-            max-width: 1200px;
-        }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 300px;
-            text-align: center;
-        }
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-info {
-            padding: 1em;
-        }
-        .card-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 0.5em 0;
-        }
-        .card-desc {
-            font-size: 0.9em;
-            color: #666;
-            margin: 0.5em 0;
-        }
-        .card-duration, .card-time {
-            font-size: 0.9em;
-            margin: 0.2em 0;
-        }
-        .btn-register {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .btn-register:hover {
-            background-color: #218838;
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background-color: #007bff; color: white; padding: 1em 0; text-align: center; }
+        .cliente-info { text-align: center; margin: 1em; font-size: 1.2em; }
+        .product-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5em; margin: 2em auto; max-width: 1200px; }
+        .card { border: 1px solid #ccc; border-radius: 8px; overflow: hidden; width: 300px; text-align: center; }
+        .card-image { width: 100%; height: 200px; object-fit: cover; }
+        .card-info { padding: 1em; }
+        .btn-register { background-color: #28a745; color: white; border: none; padding: 0.5em 1em; border-radius: 4px; cursor: pointer; }
+        .btn-back { background-color: black; color: white; text-decoration: none; padding: 0.5em 1em; border-radius: 4px; }
     </style>
 </head>
 <body>
-
-<style>
-    .btn-back {
-        display: inline-block;
-        background-color: black;
-        color: white;
-        text-decoration: none;
-        padding: 0.5em 1em;
-        border-radius: 4px;
-        font-size: 1em;
-        cursor: pointer;
-    }
-
-    .btn-back:hover {
-        background-color: #5a6268;
-    }
-</style>
-
 <header>
     <h1>Actividades Disponibles</h1>
-    <!-- Botón para volver al apartado anterior -->
+    <div class="cliente-info">
+        <p><strong>Cliente:</strong> <?php echo $cliente['nombre'] . ' ' . $cliente['apellido']; ?></p>
+        <p><strong>Correo:</strong> <?php echo $cliente['correo']; ?></p>
+        <p><strong>Teléfono:</strong> <?php echo $cliente['telefono']; ?></p>
+    </div>
     <div style="text-align: center; margin: 1em 0;">
         <a href="http://localhost/Sportclub/clientes/listarClientes.php" class="btn-back">Volver</a>
     </div>
 </header>
 
-
 <section class="product-list">
     <?php
-    include('../conexion.php'); // Archivo para conectar a la base de datos
+    // Mostrar actividades
+    $query_actividades = "SELECT * FROM actividad";
+    $result_actividades = mysqli_query($conex, $query_actividades);
 
-    // Consulta a la base de datos
-    $query = "SELECT * FROM actividad";
-    $result = mysqli_query($conex, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            // Asignar la imagen manualmente según el nombre de la actividad
-            $imagen = '';
-            switch ($row['nombre']) {
-                case 'CrossFit':
-                    $imagen = '../Imagenes/Crossfit.jpg';
-                    break;
-                case 'Yoga':
-                    $imagen = '../Imagenes/yoga.jpeg';
-                    break;
-                case 'Musculacion':
-                    $imagen = '../Imagenes/musculacion.jpg';
-                    break;
-                case 'Bodypump':
-                    $imagen = '../Imagenes/bodypump.jpg';
-                    break;
-                case 'Zumba':
-                    $imagen = '../Imagenes/zumba.jpg';
-                    break;
-                case 'Pilates':
-                    $imagen = '../Imagenes/pilates.jpg';
-                    break;
-                    case 'Spinning':
-                        $imagen = '../Imagenes/spinning.jpg';
-                        break;
-                                 case 'Spinning':
-                        $imagen = '../Imagenes/spinning.jpg';
-                        break;
-                        case 'Kickboxing':
-                            $imagen = '../Imagenes/Kickboxing.jpg';
-                            break;
-                            case 'Spinning':
-                                $imagen = '../Imagenes/spinning.jpg';
-                                break;
-                                case 'HIIT':
-                                    $imagen = '../Imagenes/hiit.jpg';
-                                    break;
-                                    case 'AquaGym':
-                                        $imagen = '../Imagenes/aquagym.jpg';
-                                        break;
-                default:
-                    $imagen = 'images/default.jpg'; // Imagen predeterminada
-                    break;
-            }
+    if (mysqli_num_rows($result_actividades) > 0) {
+        while ($actividad = mysqli_fetch_assoc($result_actividades)) {
+            $imagen = match ($actividad['nombre']) {
+                'CrossFit' => '../Imagenes/Crossfit.jepg', // Imagen para CrossFit
+                'Yoga' => '../Imagenes/yoga.jpeg',         // Imagen para Yoga
+                'Musculacion' => '../Imagenes/musculacion.jpg', // Imagen para Musculación
+                'Bodypump' => '../Imagenes/bodypump.jpg',  // Imagen para Bodypump
+                'Zumba' => '../Imagenes/zumba.jpg',        // Imagen para Zumba
+                'Pilates' => '../Imagenes/pilates.jpg',    // Imagen para Pilates
+                'Spinning' => '../Imagenes/spinning.jpg',  // Imagen para Spinning
+                'Kickboxing' => '../Imagenes/Kickboxing.jpg', // Imagen para Kickboxing
+                'HIIT' => '../Imagenes/hiit.jpg',          // Imagen para HIIT
+                'AquaGym' => '../Imagenes/aquagym.jpg',    // Imagen para AquaGym
+                default => 'images/default.jpg',           // Imagen predeterminada
+            };            
             ?>
             <div class="card">
-                <!-- Imagen asignada manualmente -->
-                <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $row['nombre']; ?>">
+                <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $actividad['nombre']; ?>">
                 <div class="card-info">
-                    <!-- Nombre de la actividad -->
-                    <p class="card-name"><?php echo $row['nombre']; ?></p>
-                    <!-- Descripción de la actividad -->
-                    <p class="card-desc"><?php echo $row['descripcion']; ?></p>
-                    <!-- Duración -->
-                    <p class="card-duration">Duración: <?php echo $row['duracion']; ?> minutos</p>
-                    <!-- Hora de inicio -->
-                    <p class="card-time">Hora de inicio: <?php echo $row['hora_inicio']; ?></p>
-                    <!-- Botón de registro -->
-                    <form method="POST" action="registro.php">
-                        <input type="hidden" name="id_actividad" value="<?php echo $row['id_actividad']; ?>">
+                    <p class="card-name"><?php echo $actividad['nombre']; ?></p>
+                    <p class="card-desc"><?php echo $actividad['descripcion']; ?></p>
+                    <form method="POST" action="actividades.php?cliente=<?php echo $dni_cliente; ?>">
+                        <input type="hidden" name="id_actividad" value="<?php echo $actividad['id_actividad']; ?>">
+                        <input type="hidden" name="dni_cliente" value="<?php echo $dni_cliente; ?>">
                         <button type="submit" class="btn-register">Registrarse</button>
                     </form>
                 </div>
