@@ -165,21 +165,27 @@ $total_paginas = ceil($total_records / $limite);
                             <a class="btn-accion" href="Form-Modi-Clientes.php?cliente=<?php echo $row['dni']; ?>">
                                 <img src="../SVG/Perfil.svg" alt="Modificar" class="icono" width="24px">
                             </a>
-                            <form method="POST" action="Eliminar-Clientes.php" style="display:inline;">
-                                <input type="hidden" name="DNI" value="<?php echo $row['dni']; ?>">
-                                <button type="submit" class="btn-accion">
-                                    <img src="../SVG/Eliminar.svg" alt="Eliminar" class="icono">
-                                </button>
-                            </form>
                             <a class="btn-accion" href="pago_cliente.php?cliente=<?php echo $row['dni']; ?>">
-                                <img src="../SVG/cuota.svg" alt="Boletín" class="icono" width="24px">
+                                <img src="../Imagenes/cuota.png"  class="icono" width="24px">
                             </a>
-                            <a class="btn-accion" href="actividades.php?cliente=<?php echo $row['dni']; ?>">
-                                <img src="../Imagenes/Gym.png" alt="Gimnasio" class="icono" width="24px">
-                            </a>
+                            <?php if ($row['estado'] == 0) { // Solo si está activo ?>
+                                <a class="btn-accion" href="actividades.php?cliente=<?php echo $row['dni']; ?>">
+                                    <img src="../Imagenes/Gym.png" alt="Gimnasio" class="icono" width="24px">
+                                </a>
+                            <?php } else { // Mostrar un ícono deshabilitado si está inactivo ?>
+                                <img src="../Imagenes/Close.png" alt="Inactivo" class="icono" width="24px" title="Cliente inactivo">
+                            <?php } ?>
                             <a class="btn-accion" href="vista-entrenamiento.php?cliente=<?php echo $row['dni']; ?>">
-                                <img src="../Imagenes/Gym.png" alt="Gimnasio" class="icono" width="24px">
+                                <img src="../Imagenes/Entrenamiento.png" alt="Gimnasio" class="icono" width="24px">
                             </a>
+                            <style>
+                                .icono {
+                                    width: 24px;
+                                    height: 24px; /* Asegúrate de que todos los íconos tengan el mismo tamaño */
+                                    margin: 0 5px; /* Espaciado entre los íconos */
+                                    vertical-align: middle; /* Alinear íconos con el texto */
+                                }
+                            </style>
                         </td>
                     </tr>
                 <?php } ?>

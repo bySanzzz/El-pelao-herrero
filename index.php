@@ -73,7 +73,7 @@
     <script src="../Sportclub/JavaScript/menu.js"></script>
 
     <div class="fondo">
-        <img src="Imagenes/inicio.png" alt="fondo">
+        <img src="Imagenes/sportclub.jpg" alt="fondo">
     </div>
     <footer>
         <div class="left-side">
