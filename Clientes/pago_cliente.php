@@ -125,5 +125,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php else: ?>
         <p>Por favor selecciona un cliente desde la tabla principal.</p>
     <?php endif; ?>
+    </a>
+                <!-- Botón para regresar -->
+                <a class="btn btn-primary btn-back" href="http://localhost/Sportclub/clientes/listarClientes.php">
+            Volver a la Página Principal
+        </a>
 </body>
 </html>

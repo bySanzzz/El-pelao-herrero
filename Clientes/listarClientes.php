@@ -63,6 +63,11 @@ $total_paginas = ceil($total_records / $limite);
         <h1 class='text-center-titulo'>Lista de Clientes</h1><br>
         <a class="btn-accion" href="http://localhost/Sportclub/Clientes/Form-Alta-Clientes.php">
             <img src="../SVG/Agregar.svg" alt="Agregar" class="icono" width="24px">
+            
+        </a>
+                <!-- Botón para regresar -->
+                <a class="btn btn-primary btn-back" href="http://localhost/Sportclub/index.php">
+            Volver a la Página Principal
         </a>
     </header>
     <!-- Filtros y búsqueda -->
