@@ -35,7 +35,7 @@
 
 <!-- Botón Volver Atrás -->
 <div class="text-center mt-4">
-    <a href="http://localhost/Sportclub/entrenadores/listarEntrenadores.php" class="btn btn-secondary">Volver Atrás</a>
+    <a href="http://localhost/Sportclub/Entrenador/listarEntrenador.php" class="btn btn-secondary">Volver Atrás</a>
 </div>
 
 <script src="../JavaScript/menu.js"></script>
