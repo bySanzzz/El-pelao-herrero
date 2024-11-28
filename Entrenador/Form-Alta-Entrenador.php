@@ -9,13 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<header>
+<body style="background-color: rgba(32, 33, 40, 255);">
+<header style="background-color: rgba(51, 51, 51, 255);">
     <div class="prese">
         <h1>Alta Entrenador</h1>
-        <div class="logo">
-            <img src="../Imagenes/sanmiguel.png" alt="Logo San Miguel">
-        </div>
+
     </div>
     <div class="menu-buttons">
         <button id="openMenu" class="botone">
@@ -34,6 +32,12 @@
         </div>
     </nav>
 </header>
+
+<!-- Botón Volver Atrás -->
+<div class="text-center mt-4">
+    <a href="http://localhost/Sportclub/entrenadores/listarEntrenadores.php" class="btn btn-secondary">Volver Atrás</a>
+</div>
+
 <script src="../JavaScript/menu.js"></script>
 <div class="content-wrapper">
     <div class="Tabla">
@@ -140,3 +144,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
