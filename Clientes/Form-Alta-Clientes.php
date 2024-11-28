@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $apellido = mysqli_real_escape_string($conex, $_POST['apellido']);
     $correo = mysqli_real_escape_string($conex, $_POST['correo']);
     $telefono = mysqli_real_escape_string($conex, $_POST['telefono']);
-    $estado = mysqli_real_escape_string($conex, $_POST['estado']);
+    
     $planilla_medica = mysqli_real_escape_string($conex, $_POST['planilla_medica']);
     $estado = 1; // Establecer por defecto como inactivo 
 

@@ -6,8 +6,8 @@
     <title>Lista de Actividades</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/cards.css">
-    <!-- Agrega tu estilo personalizado aquí -->
     <style>
+        /* Estilos básicos */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -72,15 +72,24 @@
     </style>
 </head>
 <body>
+<?php
+// Obtener el DNI del cliente desde la URL
+if (isset($_GET['cliente'])) {
+    $dni_cliente = $_GET['cliente'];
+} else {
+    die("No se recibió el DNI del cliente.");
+}
+?>
+
 <header>
     <h1>Actividades Disponibles</h1>
 </header>
 
 <section class="product-list">
     <?php
-    include('../conexion.php'); // Archivo para conectar a la base de datos
+    include('../conexion.php'); // Conexión a la base de datos
 
-    // Consulta a la base de datos
+    // Consulta de actividades
     $query = "SELECT * FROM actividad";
     $result = mysqli_query($conex, $query);
 
@@ -90,13 +99,13 @@
             $imagen = '';
             switch ($row['nombre']) {
                 case 'Crossfit':
-                    $imagen = '../Imagenes/Crossfit.jpg';
+                    $imagen = '../Imagenes/Crossfit.jpeg';
                     break;
                 case 'Yoga':
                     $imagen = '../Imagenes/yoga.jpeg';
                     break;
                 case 'Musculación':
-                    $imagen = 'images/musculacion.jpg';
+                    $imagen = '../Imagenes/musculacion.png';
                     break;
                 case 'Bodypump':
                     $imagen = 'images/bodypump.jpg';
@@ -108,25 +117,20 @@
                     $imagen = 'images/pilates.jpg';
                     break;
                 default:
-                    $imagen = 'images/default.jpg'; // Imagen predeterminada
+                    $imagen = 'images/default.jpg';
                     break;
             }
             ?>
             <div class="card">
-                <!-- Imagen asignada manualmente -->
                 <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $row['nombre']; ?>">
                 <div class="card-info">
-                    <!-- Nombre de la actividad -->
                     <p class="card-name"><?php echo $row['nombre']; ?></p>
-                    <!-- Descripción de la actividad -->
                     <p class="card-desc"><?php echo $row['descripcion']; ?></p>
-                    <!-- Duración -->
                     <p class="card-duration">Duración: <?php echo $row['duracion']; ?> minutos</p>
-                    <!-- Hora de inicio -->
                     <p class="card-time">Hora de inicio: <?php echo $row['hora_inicio']; ?></p>
-                    <!-- Botón de registro -->
                     <form method="POST" action="registro.php">
                         <input type="hidden" name="id_actividad" value="<?php echo $row['id_actividad']; ?>">
+                        <input type="hidden" name="dni_cliente" value="<?php echo $dni_cliente; ?>">
                         <button type="submit" class="btn-register">Registrarse</button>
                     </form>
                 </div>
