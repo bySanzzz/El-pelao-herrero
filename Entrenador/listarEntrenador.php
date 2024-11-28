@@ -1,18 +1,22 @@
 <?php
 include("../conexion.php");
 
-$limite = 8;
+// Configuración de paginación
+$limite = 5;
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $limite;
 
+// Configuración de orden y búsqueda
 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'nombre';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+// Validar la columna de ordenamiento para evitar SQL Injection
 $validColumns = ['nombre', 'apellido', 'fecha_contrato'];
 if (!in_array($orderBy, $validColumns)) {
     $orderBy = 'nombre';
 }
 
+// Query para obtener entrenadores con filtros y orden
 $query = "
     SELECT 
         entrenador.dni, 
@@ -36,8 +40,10 @@ if (!empty($search)) {
 }
 
 $query .= " ORDER BY $orderBy LIMIT $limite OFFSET $offset";
+
 $result = mysqli_query($conex, $query) or die("ERROR AL OBTENER ENTRENADORES");
 
+// Query para obtener el total de registros con búsqueda
 $queryTotal = "
     SELECT 
         COUNT(DISTINCT entrenador.dni) AS total 
@@ -134,7 +140,7 @@ $total_paginas = ceil($total_records / $limite);
             <ul class='pagination'>
                 <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
                     <li class='page-item <?php echo $i == $pagina_actual ? 'active' : ''; ?>'>
-                        <a class='page-link' href='listado_entrenadores.php?pagina=<?php echo $i; ?>&orderBy=<?php echo $orderBy; ?>&search=<?php echo $search; ?>'><?php echo $i; ?></a>
+                        <a class='page-link' href='listarEntrenador.php?pagina=<?php echo $i; ?>&orderBy=<?php echo $orderBy; ?>&search=<?php echo urlencode($search); ?>'><?php echo $i; ?></a>
                     </li>
                 <?php } ?>
             </ul>
@@ -144,7 +150,7 @@ $total_paginas = ceil($total_records / $limite);
         function changeFilter() {
             let orderBy = document.getElementById('orderSelect').value;
             let search = document.getElementById('searchInput').value;
-            let url = `listado_entrenadores.php?pagina=1&orderBy=${orderBy}&search=${search}`;
+            let url = `listarEntrenador.php?pagina=1&orderBy=${orderBy}&search=${encodeURIComponent(search)}`;
             window.location.href = url;
         }
         function handleSearchKeypress(event) {
