@@ -125,12 +125,6 @@ $total_paginas = ceil($total_records / $limite);
                             <a class="btn-accion" href="Form-Modi-Entrenador.php?entrenador=<?php echo $row['dni']; ?>">
                                 <img src="../SVG/Perfil.svg" alt="Modificar" class="icono" width="24px">
                             </a>
-                            <form method="POST" action="Form-Eliminar-Entrenador.php" style="display:inline;">
-                                <input type="hidden" name="DNI" value="<?php echo $row['dni']; ?>">
-                                <button type="submit" class="btn-accion">
-                                    <img src="../SVG/Eliminar.svg" alt="Eliminar" class="icono">
-                                </button>
-                            </form>
                         </td>
                     </tr>
                 <?php } ?>

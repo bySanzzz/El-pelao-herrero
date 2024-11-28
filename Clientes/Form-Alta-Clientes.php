@@ -79,10 +79,10 @@
                 <input type="text" name="telefono" placeholder="Teléfono" required><br>
                 
                 <label for="planilla_medica">¿Tiene planilla médica?</label><br>
-                <select name="planilla_medica" required>
-                    <option value="Sí">Sí</option>
-                    <option value="No">No</option>
-                </select><br>
+                    <select name="planilla_medica" required>
+                        <option value="Sí">Sí</option>
+                        <option value="No">No</option>
+                    </select><br>
                 <input type="submit" value="Registrar">
             </form>
 

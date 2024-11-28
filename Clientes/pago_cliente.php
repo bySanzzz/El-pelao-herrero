@@ -27,10 +27,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cuota = $_POST['cuota'];
     $fecha_pago = date('Y-m-d');
 
-    // Calcular fecha de vencimiento según la cuota seleccionada
+    // Consultar el último pago del cliente para obtener la fecha de vencimiento anterior
+    $sql_ultimo_pago = "SELECT MAX(fecha_vencimiento) AS fecha_vencimiento FROM pago_cliente WHERE dni_cliente = $dni_cliente";
+    $resultado_pago = $conex->query($sql_ultimo_pago);
+    $fecha_vencimiento_anterior = '';
+    if ($resultado_pago->num_rows > 0) {
+        $row = $resultado_pago->fetch_assoc();
+        $fecha_vencimiento_anterior = $row['fecha_vencimiento'];
+    }
+
+    // Calcular la nueva fecha de vencimiento
     $meses = $cuota == '1' ? 1 : 3; // 1 mes o 3 meses
     $monto = $cuota == '1' ? 20000 : 45000; // 20 mil o 45 mil
-    $fecha_vencimiento = date('Y-m-d', strtotime("+$meses months"));
+
+    // Si hay un pago anterior, calcula la nueva fecha de vencimiento
+    if ($fecha_vencimiento_anterior) {
+        // Si ya hay un pago, sumar los meses al último vencimiento
+        $fecha_vencimiento = date('Y-m-d', strtotime("+$meses months", strtotime($fecha_vencimiento_anterior)));
+    } else {
+        // Si no hay pago anterior, la fecha de vencimiento es a partir de la fecha de pago
+        $fecha_vencimiento = date('Y-m-d', strtotime("+$meses months"));
+    }
 
     // Insertar el pago en la tabla pago_cliente
     $sql_pago = "INSERT INTO pago_cliente (monto, dni_cliente, fecha_de_pago, fecha_vencimiento) 
@@ -39,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Actualizar el estado del cliente a 0 (Activo)
         $sql_cliente = "UPDATE cliente SET estado=0 WHERE dni=$dni_cliente";
         if ($conex->query($sql_cliente) === TRUE) {
-            $mensaje = "¡Pago registrado y cliente activado correctamente!";
+            $mensaje = "¡Pago registrado y cliente activado correctamente! El nuevo vencimiento es: $fecha_vencimiento.";
         } else {
             $mensaje = "Error al actualizar el estado del cliente: " . $conex->error;
         }
@@ -191,4 +208,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </body>
 </html>
-
