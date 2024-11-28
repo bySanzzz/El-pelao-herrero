@@ -4,21 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Cliente</title>
-    <link rel="stylesheet" href="../CSS/indexmodi.css">
-    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../Style/header.css">
+    <link rel="stylesheet" href="../Style/indexinscrip.css">
+    <link rel="stylesheet" href="../Style/indexmodi.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Cambios de estilo para header */
+        header {
+            background-color: rgba(51, 51, 51, 1);
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .prese h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        body {
+            background-color: rgba(32, 33, 40, 1);
+            color: black;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .btn {
+            margin-top: 20px;
+        }
+
+        .btn-danger {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .btn-success {
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        /* Contenedor de botones centrado y separación con el header */
+        .btn-container {
+            text-align: center;
+            margin-top: 40px; /* Separación entre el header y el botón */
+        }
+
+        /* Estilo del botón Volver */
+        .btn-custom {
+            background-color: #6c757d; /* Botón gris */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 5px; /* Separación entre botones */
+        }
+
+        .btn-custom:hover {
+            background-color: #5a6268; /* Hover más oscuro */
+        }
+
+        /* Separación entre la tabla y el botón */
+        .table-container {
+            margin-bottom: 40px; /* Separación entre la tabla y el botón */
+        }
+
+    </style>
 </head>
 <body>
 <header>
     <div class="prese">
         <h1>Eliminar Cliente</h1>
-        <div class="logo">
-            <img src="../Imagenes/sanmiguel.png" alt="Logo San Miguel">
-        </div>
     </div>
 </header>
+
+<!-- Botón Volver centrado con separación -->
+<div class="btn-container">
+    <a href="http://localhost/Sportclub/Clientes/listarClientes.php" class="btn-custom">Volver</a>
+</div>
 
 <?php
     include("../conexion.php");
@@ -43,17 +115,16 @@
             // Mostrar los datos del cliente
             while ($row = mysqli_fetch_array($check_result)) {
 ?>
-                <form method="POST" action="">
-                    DNI: <input type="text" name="modiDNI" value="<?php echo($row['dni']); ?>" readonly> <br>
-                    Nombre: <?php echo($row['nombre']); ?> <br>
-                    Apellido: <?php echo($row['apellido']); ?> <br>
-                    Correo: <?php echo($row['correo']); ?> <br>
-                    Estado: <?php echo($row['estado']); ?> <br>
-                    <br>
-                    <input type="button" name="eliminar" value="Eliminar Cliente" class="btn btn-danger" style="background-color: red;" onclick="confirmDelete('<?php echo $row['dni']; ?>');">
-                </form>
-                <div class="volvido">
-                    <a href="../cliente/listarClientes.php">VOLVER</a>
+                <div class="table-container"> <!-- Añadido contenedor para la tabla -->
+                    <form method="POST" action="">
+                        DNI: <input type="text" name="modiDNI" value="<?php echo($row['dni']); ?>" readonly> <br>
+                        Nombre: <?php echo($row['nombre']); ?> <br>
+                        Apellido: <?php echo($row['apellido']); ?> <br>
+                        Correo: <?php echo($row['correo']); ?> <br>
+                        Estado: <?php echo($row['estado']); ?> <br>
+                        <br>
+                        <input type="button" name="eliminar" value="Eliminar Cliente" class="btn btn-danger" style="background-color: red;" onclick="confirmDelete('<?php echo $row['dni']; ?>');">
+                    </form>
                 </div>
 <?php
             }
