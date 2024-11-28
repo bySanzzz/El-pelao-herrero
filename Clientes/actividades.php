@@ -1,3 +1,32 @@
+<?php
+// Incluye el archivo de conexión a la base de datos
+include('../conexion.php');
+
+// Obtén el DNI del cliente desde la URL
+if (isset($_GET['cliente'])) {
+    $dni_cliente = $_GET['cliente'];
+
+    // Consulta para obtener los datos del cliente
+    $query_cliente = "SELECT * FROM cliente WHERE dni = '$dni_cliente'";
+    $resultado_cliente = mysqli_query($conex, $query_cliente);
+
+    // Verifica si el cliente existe
+    if (mysqli_num_rows($resultado_cliente) > 0) {
+        $cliente = mysqli_fetch_assoc($resultado_cliente);
+    } else {
+        echo "Cliente no encontrado.";
+        exit();
+    }
+} else {
+    echo "No se proporcionó un cliente.";
+    exit();
+}
+
+// Consulta para obtener las actividades
+$query_actividades = "SELECT * FROM actividad";
+$result_actividades = mysqli_query($conex, $query_actividades);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,95 +35,34 @@
     <title>Lista de Actividades</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/cards.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
     <style>
-        /* Estilos básicos */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 1em 0;
+        /* Agregar estilo adicional para mostrar los datos del cliente */
+        .cliente-info {
             text-align: center;
-        }
-        .product-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5em;
-            margin: 2em auto;
-            max-width: 1200px;
-        }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 300px;
-            text-align: center;
-        }
-        .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-info {
-            padding: 1em;
-        }
-        .card-name {
-            font-size: 1.5em;
+            margin-bottom: 2em;
+            font-size: 1.2em;
             font-weight: bold;
-            margin: 0.5em 0;
-        }
-        .card-desc {
-            font-size: 0.9em;
-            color: #666;
-            margin: 0.5em 0;
-        }
-        .card-duration, .card-time {
-            font-size: 0.9em;
-            margin: 0.2em 0;
-        }
-        .btn-register {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        .btn-register:hover {
-            background-color: #218838;
         }
     </style>
 </head>
 <body>
-<?php
-// Obtener el DNI del cliente desde la URL
-if (isset($_GET['cliente'])) {
-    $dni_cliente = $_GET['cliente'];
-} else {
-    die("No se recibió el DNI del cliente.");
-}
-?>
-
 <header>
     <h1>Actividades Disponibles</h1>
 </header>
 
+<!-- Información del cliente -->
+<section class="cliente-info">
+    <p>Bienvenido, <?php echo $cliente['nombre'] . ' ' . $cliente['apellido']; ?></p>
+    <p>DNI: <?php echo $cliente['dni']; ?></p>
+    <p>Correo: <?php echo $cliente['correo']; ?></p>
+</section>
+
 <section class="product-list">
     <?php
-    include('../conexion.php'); // Conexión a la base de datos
-
-    // Consulta de actividades
-    $query = "SELECT * FROM actividad";
-    $result = mysqli_query($conex, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
+    // Mostrar las actividades disponibles
+    if (mysqli_num_rows($result_actividades) > 0) {
+        while ($row = mysqli_fetch_assoc($result_actividades)) {
             // Asignar la imagen manualmente según el nombre de la actividad
             $imagen = '';
             switch ($row['nombre']) {
@@ -107,17 +75,8 @@ if (isset($_GET['cliente'])) {
                 case 'Musculación':
                     $imagen = '../Imagenes/musculacion.png';
                     break;
-                case 'Bodypump':
-                    $imagen = 'images/bodypump.jpg';
-                    break;
-                case 'Zumba':
-                    $imagen = 'images/zumba.jpg';
-                    break;
-                case 'Pilates':
-                    $imagen = 'images/pilates.jpg';
-                    break;
                 default:
-                    $imagen = 'images/default.jpg';
+                    $imagen = '../Imagenes/default.jpg';
                     break;
             }
             ?>
@@ -130,7 +89,7 @@ if (isset($_GET['cliente'])) {
                     <p class="card-time">Hora de inicio: <?php echo $row['hora_inicio']; ?></p>
                     <form method="POST" action="registro.php">
                         <input type="hidden" name="id_actividad" value="<?php echo $row['id_actividad']; ?>">
-                        <input type="hidden" name="dni_cliente" value="<?php echo $dni_cliente; ?>">
+                        <input type="hidden" name="dni_cliente" value="<?php echo $cliente['dni']; ?>">
                         <button type="submit" class="btn-register">Registrarse</button>
                     </form>
                 </div>

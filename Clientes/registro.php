@@ -1,39 +1,62 @@
 <?php
 include('../conexion.php');
 
-// Verificar si se enviaron los datos necesarios
-if (!isset($_POST['dni_cliente'], $_POST['id_actividad'])) {
-    die("No se recibieron los datos necesarios para el registro.");
-}
+// Verifica si se recibieron los datos del formulario
+if (isset($_POST['id_actividad']) && isset($_POST['dni_cliente'])) {
+    $id_actividad = $_POST['id_actividad'];
+    $dni_cliente = $_POST['dni_cliente'];
 
-// Obtener datos del cliente y la actividad
-$dni_cliente = $_POST['dni_cliente'];
-$id_actividad = $_POST['id_actividad'];
+    // Obtener el DNI del entrenador asignado a la actividad
+    $query_entrenador = "SELECT dni FROM entrenador WHERE id_actividad = '$id_actividad' LIMIT 1";
+    $resultado_entrenador = mysqli_query($conex, $query_entrenador);
 
-// Consultar el DNI del entrenador asociado a la actividad
-$query_entrenador = "SELECT dni FROM entrenador WHERE id_actividad = ?";
-$stmt = $conex->prepare($query_entrenador);
-$stmt->bind_param("i", $id_actividad);
-$stmt->execute();
-$result = $stmt->get_result();
-$entrenador = $result->fetch_assoc();
+    if (mysqli_num_rows($resultado_entrenador) > 0) {
+        $entrenador = mysqli_fetch_assoc($resultado_entrenador);
+        $dni_entrenador = $entrenador['dni'];
 
-// Verificar si se encontró un entrenador
-if (!$entrenador) {
-    die("No se encontró un entrenador para esta actividad.");
-}
-$dni_entrenador = $entrenador['dni'];
+        // Insertar los datos en la tabla entrenamiento
+        $fecha_actual = date('Y-m-d');
+        $query_insert = "INSERT INTO entrenamiento (dni_cliente, id_actividad, fecha, dni_entrenador) 
+                         VALUES ('$dni_cliente', '$id_actividad', '$fecha_actual', '$dni_entrenador')";
 
-// Registrar el entrenamiento en la base de datos
-$fecha_actual = date('Y-m-d');
-$query_insert = "INSERT INTO entrenamiento (dni_cliente, id_actividad, fecha, dni_entrenador) VALUES (?, ?, ?, ?)";
-$stmt_insert = $conex->prepare($query_insert);
-$stmt_insert->bind_param("iisi", $dni_cliente, $id_actividad, $fecha_actual, $dni_entrenador);
-
-if ($stmt_insert->execute()) {
-    echo "¡Registro exitoso en la actividad!";
-    header("Location: actividades.php?cliente=$dni_cliente");
+        if (mysqli_query($conex, $query_insert)) {
+            echo "<script>
+                    Swal.fire({
+                        position: 'mid',
+                        icon: 'success',
+                        title: 'Cliente registrado en la actividad con éxito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(() => {
+                        window.location.href = 'actividades.php?cliente=$dni_cliente';
+                    }, 1500);
+                  </script>";
+        } else {
+            echo "<script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al registrar',
+                        text: 'Inténtalo nuevamente.',
+                    });
+                  </script>";
+        }
+    } else {
+        echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No se encontró un entrenador para esta actividad',
+                    text: 'Inténtalo nuevamente.',
+                });
+              </script>";
+    }
 } else {
-    echo "Error al registrar la actividad: " . $stmt_insert->error;
+    echo "<script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Datos incompletos',
+                text: 'Inténtalo nuevamente.',
+            });
+          </script>";
 }
 ?>
