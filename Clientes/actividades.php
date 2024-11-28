@@ -81,6 +81,24 @@ $result_actividades = mysqli_query($conex, $query_actividades);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
     <style>
+        body {
+            background-color: #f7f7f7; /* Fondo claro */
+            font-family: Arial, sans-serif;
+            color: #333; /* Texto oscuro para buena legibilidad */
+        }
+        header {
+            background-color: rgba(51, 51, 51, 255);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 5px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header button {
+            margin-top: 1em;
+        }
         .cliente-info {
             text-align: center;
             margin-bottom: 2em;
@@ -94,16 +112,60 @@ $result_actividades = mysqli_query($conex, $query_actividades);
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
+        .card-img-top {
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .card-body {
+            padding: 1.25rem;
+            background-color: rgba(32,33,40,255;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333; /* Color oscuro para los títulos */
+        }
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #555; /* Color gris para el texto de las tarjetas */
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: rgba(51, 51, 51, 255);
+            border-color: rgba(51, 51, 51, 255);
+        }
+        .pagination .page-link {
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
-<header class="text-center my-4" style="background-color: rgba(51,51,51,255); color: white; padding: 1rem; border-radius: 5px;">
+<header>
     <h1>Actividades Disponibles</h1>
     <!-- Botón para volver atrás -->
     <button class="btn btn-secondary mt-3" onclick="history.back()">Volver Atrás</button>
 </header>
-
-
 
 <!-- Información del cliente -->
 <section class="cliente-info">
@@ -162,12 +224,12 @@ $result_actividades = mysqli_query($conex, $query_actividades);
                         </div>
                     </div>
                 </div>
-                <?php
-            }
-        } else {
-            echo "<p>No hay actividades disponibles.</p>";
+            <?php
         }
-        ?>
+    } else {
+        echo "<p>No hay actividades disponibles.</p>";
+    }
+    ?>
     </div>
 </section>
 
