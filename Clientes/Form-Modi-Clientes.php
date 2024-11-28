@@ -12,7 +12,7 @@
     <style>
         body {
             background-color: rgba(32,33,40,255); /* Fondo debajo del header */
-            color: white; /* Ajustar texto para mejor visibilidad */
+            color: black; /* Ajustar texto para mejor visibilidad */
         }
         header {
             background-color: rgba(51,51,51,255); /* Color del header */
