@@ -55,12 +55,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago Cliente</title>
     <style>
+        /* Reset de márgenes y padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
+            padding: 0;
+            padding-top: 150px; /* Agregar espacio para que el contenido no quede tapado por el header */
         }
+
+        /* Estilos para el Header */
+        header {
+            background-color: #333; /* Fondo gris oscuro */
+            color: white;
+            padding: 25px 0; /* Aumentar el padding para el header más grande */
+            text-align: left;
+            width: 100%;
+            height: 120px; /* Aumentar la altura del header */
+            margin: 0;
+            position: absolute;
+            top: 0;
+        }
+
+        header h1 {
+            margin-left: 20px;
+            font-size: 2rem; /* Aumentar el tamaño del texto */
+            line-height: 1.5; /* Centrar verticalmente */
+            margin-top: 10px; /* Ajustar margen superior para centrar el título */
+        }
+
+        /* Estilos para el formulario */
         form {
             background: #fff;
             padding: 20px;
@@ -69,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             max-width: 400px;
             margin: 20px auto;
         }
+
         input, select, button {
             display: block;
             width: 100%;
@@ -76,33 +106,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 10px;
             font-size: 16px;
         }
+
         button {
-            background-color: #28a745;
+            background-color: #28a745; /* Verde */
             color: white;
             border: none;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: #218838;
+            background-color: #218838; /* Verde más oscuro */
         }
+
         .mensaje {
             text-align: center;
             margin-bottom: 20px;
             font-size: 18px;
             color: green;
         }
+
         .cliente-info {
             text-align: center;
             margin-bottom: 20px;
         }
+
+        /* Estilo para el botón 'Atrás' */
+        .btn-back {
+            display: block;
+            margin: 20px auto;
+            background-color: #6c757d; /* Gris */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            width: auto; /* Ajustar el tamaño */
+            max-width: 200px; /* Limitar el tamaño máximo */
+        }
+
+        .btn-back:hover {
+            background-color: #5a6268; /* Gris más oscuro */
+        }
+
     </style>
 </head>
 <body>
-    <h1>Registro de Pago</h1>
+    <!-- Header -->
+    <header>
+        <h1>Registro de Pago</h1>
+    </header>
+
+    <!-- Mensaje de confirmación o error -->
     <?php if (!empty($mensaje)) : ?>
         <div class="mensaje"><?php echo $mensaje; ?></div>
     <?php endif; ?>
 
+    <!-- Información del cliente -->
     <?php if ($cliente): ?>
         <div class="cliente-info">
             <h2>Cliente: <?php echo $cliente['nombre'] . " " . $cliente['apellido']; ?></h2>
@@ -111,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p>Estado: <?php echo $cliente['estado'] == 0 ? 'Activo' : 'Inactivo'; ?></p>
         </div>
 
+        <!-- Formulario para registrar el pago -->
         <form action="" method="POST">
             <input type="hidden" name="dni_cliente" value="<?php echo $cliente['dni']; ?>">
             
@@ -125,10 +185,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php else: ?>
         <p>Por favor selecciona un cliente desde la tabla principal.</p>
     <?php endif; ?>
-    </a>
-                <!-- Botón para regresar -->
-                <a class="btn btn-primary btn-back" href="http://localhost/Sportclub/clientes/listarClientes.php">
-            Volver a la Página Principal
-        </a>
+
+    <!-- Botón Atrás -->
+    <a href="http://localhost/Sportclub/Clientes/listarClientes.php" class="btn-back">Atrás</a>
+
 </body>
 </html>
+
