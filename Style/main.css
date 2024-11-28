@@ -1,0 +1,112 @@
+@media  (min-width:700px){
+
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3%;
+    }
+
+    .card {
+        margin-top: 50px;
+        position: relative;
+        width: 25%;
+        background-color: gray;
+        border-radius: 8%;
+    }
+    .card:hover {
+        box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        -moz-box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        transition: 300ms;
+    }
+
+    .card-image {
+        border-radius: 8% 8% 0 0;
+        width: 100%;
+    }
+    .card-image:hover {
+        transition: 300ms;
+    }
+
+    .card-info {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        color: white;
+    }
+
+    .card-name {
+        width: 50%;
+        text-align: left;
+        margin-left: 10%;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    .card-price {
+        width: 50%;
+        text-align: right;
+        margin-right: 10%;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+}
+
+@media  (max-width:700px){
+
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3%;
+    }
+
+    .card {
+        margin-top: 50px;
+        position: relative;
+        width: 33%;
+        background-color: gray;
+        border-radius: 8%;
+    }
+    .card:hover {
+        box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        -moz-box-shadow: 24px 20px 28px -7px rgba(0,0,0,0.75);
+        transition: 300ms;
+    }
+
+    .card-image {
+        border-radius: 8% 8% 0 0;
+        width: 100%;
+    }
+    .card-image:hover {
+        transition: 300ms;
+    }
+
+    .card-info {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        color: white;
+    }
+
+    .card-name {
+        width: 100%;
+        text-align: left;
+        margin-left: 10%;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    .card-price {
+        width: 50%;
+        text-align: right;
+        margin-right: 10%;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+
+}

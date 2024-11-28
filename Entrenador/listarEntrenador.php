@@ -1,12 +1,10 @@
 <?php
 include("../conexion.php");
 
-//-----------------------------------------------------------------PAGINADO
 $limite = 8;
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $limite;
 
-//----------------------------------------------------------------ORDEN TABLA
 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : 'nombre';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
@@ -15,7 +13,6 @@ if (!in_array($orderBy, $validColumns)) {
     $orderBy = 'nombre';
 }
 
-//-----------------------------------------------------------------CONSULTA PRINCIPAL
 $query = "
     SELECT 
         entrenador.dni, 
@@ -29,8 +26,7 @@ $query = "
     LEFT JOIN 
         actividad 
     ON 
-        entrenador.id_actividad = actividad.id_actividad"; // Relación ajustada
-
+        entrenador.id_actividad = actividad.id_actividad";
 
 if (!empty($search)) {
     $query .= " WHERE 
@@ -42,7 +38,6 @@ if (!empty($search)) {
 $query .= " ORDER BY $orderBy LIMIT $limite OFFSET $offset";
 $result = mysqli_query($conex, $query) or die("ERROR AL OBTENER ENTRENADORES");
 
-//-----------------------------------------------------------------OBTENER TOTAL DE REGISTROS
 $queryTotal = "
     SELECT 
         COUNT(DISTINCT entrenador.dni) AS total 
@@ -51,7 +46,7 @@ $queryTotal = "
     LEFT JOIN 
         actividad 
     ON 
-        entrenador.dni = actividad.Dni_entrenador";
+        entrenador.id_actividad = actividad.id_actividad";
 
 if (!empty($search)) {
     $queryTotal .= " WHERE 
@@ -74,7 +69,6 @@ $total_paginas = ceil($total_records / $limite);
     <link rel="stylesheet" href="../SportClub/Style/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
     <header>
         <h1 class='text-center-titulo'>Lista de Entrenadores</h1><br>
@@ -82,7 +76,6 @@ $total_paginas = ceil($total_records / $limite);
             <img src="../SVG/Agregar.svg" alt="Agregar" class="icono" width="24px">
         </a>
     </header>
-    <!-- Filtros y búsqueda -->
     <div class='container'>
         <div class='row mb-3'>
             <div class='col-md-3'>
@@ -101,8 +94,6 @@ $total_paginas = ceil($total_records / $limite);
                 </div>
             </div>
         </div>
-
-        <!-- Tabla de entrenadores -->
         <table class='table table-striped'>
             <thead>
                 <tr>
@@ -139,8 +130,6 @@ $total_paginas = ceil($total_records / $limite);
                 <?php } ?>
             </tbody>
         </table>
-
-        <!-- Paginación -->
         <nav>
             <ul class='pagination'>
                 <?php for ($i = 1; $i <= $total_paginas; $i++) { ?>
@@ -151,7 +140,6 @@ $total_paginas = ceil($total_records / $limite);
             </ul>
         </nav>
     </div>
-
     <script>
         function changeFilter() {
             let orderBy = document.getElementById('orderSelect').value;
@@ -159,7 +147,6 @@ $total_paginas = ceil($total_records / $limite);
             let url = `listado_entrenadores.php?pagina=1&orderBy=${orderBy}&search=${search}`;
             window.location.href = url;
         }
-
         function handleSearchKeypress(event) {
             if (event.key === 'Enter') {
                 changeFilter();

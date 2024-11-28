@@ -129,7 +129,7 @@ $total_paginas = ceil($total_records / $limite);
                     <a class="btn-accion" href="pago_cliente.php?cliente=<?php echo $row['dni']; ?>">
                         <img src="../SVG/cuota.svg" alt="Boletín" class="icono" width="24px">
                     </a>
-                    <a class="btn-accion" href="pago_cliente.php?cliente=<?php echo $row['dni']; ?>">
+                    <a class="btn-accion" href="actividades.php?cliente=<?php echo $row['dni']; ?>">
                         <img src="../Imagenes/Gym.png" alt="Gimnasio" class="icono" width="24px">
                     </a>
                 </td>
