@@ -4,25 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Entrenador</title>
-    <link rel="stylesheet" href="../CSS/indexmodi.css">
-    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../Style/header.css">
+    <link rel="stylesheet" href="../Style/indexinscrip.css">
+    <link rel="stylesheet" href="../Style/indexmodi.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(32, 33, 40, 1);
+        }
+
+        /* Centrar el contenedor y darle margen superior para separarlo del header */
+        .volver-container {
+            display: flex;
+            justify-content: center; /* Centra el botón horizontalmente */
+            margin-top: 20px; /* Espacio debajo del header */
+        }
+
+        /* Estilo del botón */
+        .btn-custom {
+            background-color: #6c757d; /* Color del fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin bordes */
+            padding: 8px 16px; /* Ajusta el padding para hacerlo más pequeño */
+            font-size: 14px; /* Fuente más pequeña */
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: background-color 0.3s; /* Transición suave para el hover */
+        }
+
+        /* Efecto hover */
+        .btn-custom:hover {
+            background-color: #5a6268; /* Color de fondo cuando el mouse está sobre el botón */
+        }
+    </style>
 </head>
+
 <body>
 <header>
     <div class="prese">
         <h1>Modificar Entrenador</h1>
-        <div class="logo">
-            <img src="../Imagenes/sanmiguel.png" alt="Logo San Miguel">
-        </div>
     </div>
-    <nav class="nav-list">
-        <ul>
-            <h2><li><a href="http://localhost:8080/Sportclub/">Principal</a></li></h2>
-            <h2><li><a href="http://localhost:8080/Sportclub/entrenadores/listado_entrenadores.php">Entrenadores</a></li></h2>
-        </ul>
-    </nav>
 </header>
+    <!-- Contenedor para el botón de "Volver al Inicio" -->
+    <div class="volver-container">
+        <a href="http://localhost/Sportclub/Entrenador/listarEntrenador.php" class="btn-custom">Volver</a>
+    </div>
+
 
 <?php
 include("../conexion.php");
@@ -107,3 +134,4 @@ function updateLabel(checkbox) {
 </script>
 </body>
 </html>
+
