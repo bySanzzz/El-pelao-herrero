@@ -33,13 +33,8 @@ $result_actividades = mysqli_query($conex, $query_actividades);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Actividades</title>
-<<<<<<< HEAD
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-=======
-    <link rel="stylesheet" href="../Style/main.css">
-    <link rel="stylesheet" href="../Style/cards.css">
->>>>>>> 19b70c552abc6fa32e8c48bd443e3b34c8784a0e
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert -->
     <style>
         .cliente-info {
@@ -48,7 +43,6 @@ $result_actividades = mysqli_query($conex, $query_actividades);
             font-size: 1.2em;
             font-weight: bold;
         }
-<<<<<<< HEAD
         .card {
             margin: 1em;
             padding: 1em;
@@ -56,31 +50,23 @@ $result_actividades = mysqli_query($conex, $query_actividades);
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
         }
-=======
->>>>>>> 19b70c552abc6fa32e8c48bd443e3b34c8784a0e
     </style>
 </head>
 <body>
 <header class="text-center my-4" style="background-color: rgba(51,51,51,255); color: white; padding: 1rem; border-radius: 5px;">
     <h1>Actividades Disponibles</h1>
-<<<<<<< HEAD
     <!-- Botón para volver atrás -->
     <button class="btn btn-secondary mt-3" onclick="history.back()">Volver Atrás</button>
 </header>
 
 
 
-=======
-</header>
-
->>>>>>> 19b70c552abc6fa32e8c48bd443e3b34c8784a0e
 <!-- Información del cliente -->
 <section class="cliente-info">
     <p>Bienvenido, <?php echo $cliente['nombre'] . ' ' . $cliente['apellido']; ?></p>
     <p>DNI: <?php echo $cliente['dni']; ?></p>
     <p>Correo: <?php echo $cliente['correo']; ?></p>
 </section>
-<<<<<<< HEAD
 
 <section class="container">
     <div class="row">
@@ -88,15 +74,10 @@ $result_actividades = mysqli_query($conex, $query_actividades);
     // Mostrar actividades
     $query_actividades = "SELECT * FROM actividad";
     $result_actividades = mysqli_query($conex, $query_actividades);
-=======
->>>>>>> 19b70c552abc6fa32e8c48bd443e3b34c8784a0e
 
-<section class="product-list">
-<?php
     if (mysqli_num_rows($result_actividades) > 0) {
         while ($actividad = mysqli_fetch_assoc($result_actividades)) {
             $imagen = match ($actividad['nombre']) {
-<<<<<<< HEAD
                 'CrossFit' => '../Imagenes/Crossfit.jpeg', // Imagen para CrossFit
                 'Yoga' => '../Imagenes/yoga.jpeg',         // Imagen para Yoga
                 'Musculacion' => '../Imagenes/musculacion.jpg', // Imagen para Musculación
@@ -136,40 +117,6 @@ $result_actividades = mysqli_query($conex, $query_actividades);
                             </form>
                         </div>
                     </div>
-=======
-                'CrossFit' => '../Imagenes/Crossfit.jpeg',
-                'Yoga' => '../Imagenes/yoga.jpeg',
-                'Musculacion' => '../Imagenes/musculacion.jpg',
-                'Bodypump' => '../Imagenes/bodypump.jpg',
-                'Zumba' => '../Imagenes/zumba.jpg',
-                'Pilates' => '../Imagenes/pilates.jpg',
-                'Spinning' => '../Imagenes/spinning.jpg',
-                'Kickboxing' => '../Imagenes/Kickboxing.jpg',
-                'HIIT' => '../Imagenes/hiit.jpg',
-                'AquaGym' => '../Imagenes/aquagym.jpg',
-                default => '../Imagenes/default.jpg',
-            };
-            ?>
-            <div class="card">
-                <img class="card-image" src="<?php echo $imagen; ?>" alt="Imagen de <?php echo $actividad['nombre']; ?>">
-                <div class="card-info">
-                    <p class="card-name"><?php echo $actividad['nombre']; ?></p>
-                    <p class="card-desc"><?php echo $actividad['descripcion']; ?></p>
-                    <p class="card-duration">Duración: <?php echo $actividad['duracion']; ?> minutos</p>
-                    <p class="card-time">Hora de inicio: <?php echo $actividad['hora_inicio']; ?></p>
-                    <form method="POST" action="registro.php">
-                        <input type="hidden" name="id_actividad" value="<?php echo $actividad['id_actividad']; ?>">
-                        <input type="hidden" name="dni_cliente" value="<?php echo $cliente['dni']; ?>">
-                        
-                        <label for="fecha_ingreso">Fecha de ingreso:</label>
-                        <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
-
-                        <label for="hora_ingreso">Hora de ingreso:</label>
-                        <input type="time" id="hora_ingreso" name="hora_ingreso" required>
-                        
-                        <button type="submit" class="btn-register">Registrarse</button>
-                    </form>
->>>>>>> 19b70c552abc6fa32e8c48bd443e3b34c8784a0e
                 </div>
                 <?php
             }
