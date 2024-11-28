@@ -72,9 +72,32 @@
     </style>
 </head>
 <body>
+
+<style>
+    .btn-back {
+        display: inline-block;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        padding: 0.5em 1em;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+    }
+</style>
+
 <header>
     <h1>Actividades Disponibles</h1>
+    <!-- Botón para volver al apartado anterior -->
+    <div style="text-align: center; margin: 1em 0;">
+        <a href="http://localhost/Sportclub/clientes/listarClientes.php" class="btn-back">Volver</a>
+    </div>
 </header>
+
 
 <section class="product-list">
     <?php
@@ -89,24 +112,42 @@
             // Asignar la imagen manualmente según el nombre de la actividad
             $imagen = '';
             switch ($row['nombre']) {
-                case 'Crossfit':
+                case 'CrossFit':
                     $imagen = '../Imagenes/Crossfit.jpg';
                     break;
                 case 'Yoga':
                     $imagen = '../Imagenes/yoga.jpeg';
                     break;
-                case 'Musculación':
-                    $imagen = 'images/musculacion.jpg';
+                case 'Musculacion':
+                    $imagen = '../Imagenes/musculacion.jpg';
                     break;
                 case 'Bodypump':
-                    $imagen = 'images/bodypump.jpg';
+                    $imagen = '../Imagenes/bodypump.jpg';
                     break;
                 case 'Zumba':
-                    $imagen = 'images/zumba.jpg';
+                    $imagen = '../Imagenes/zumba.jpg';
                     break;
                 case 'Pilates':
-                    $imagen = 'images/pilates.jpg';
+                    $imagen = '../Imagenes/pilates.jpg';
                     break;
+                    case 'Spinning':
+                        $imagen = '../Imagenes/spinning.jpg';
+                        break;
+                                 case 'Spinning':
+                        $imagen = '../Imagenes/spinning.jpg';
+                        break;
+                        case 'Kickboxing':
+                            $imagen = '../Imagenes/Kickboxing.jpg';
+                            break;
+                            case 'Spinning':
+                                $imagen = '../Imagenes/spinning.jpg';
+                                break;
+                                case 'HIIT':
+                                    $imagen = '../Imagenes/hiit.jpg';
+                                    break;
+                                    case 'AquaGym':
+                                        $imagen = '../Imagenes/aquagym.jpg';
+                                        break;
                 default:
                     $imagen = 'images/default.jpg'; // Imagen predeterminada
                     break;
