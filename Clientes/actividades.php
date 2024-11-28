@@ -68,7 +68,7 @@ if (isset($_GET['cliente'])) {
     if (mysqli_num_rows($result_actividades) > 0) {
         while ($actividad = mysqli_fetch_assoc($result_actividades)) {
             $imagen = match ($actividad['nombre']) {
-                'CrossFit' => '../Imagenes/Crossfit.jepg', // Imagen para CrossFit
+                'CrossFit' => '../Imagenes/Crossfit.jpeg', // Imagen para CrossFit
                 'Yoga' => '../Imagenes/yoga.jpeg',         // Imagen para Yoga
                 'Musculacion' => '../Imagenes/musculacion.jpg', // Imagen para Musculación
                 'Bodypump' => '../Imagenes/bodypump.jpg',  // Imagen para Bodypump
