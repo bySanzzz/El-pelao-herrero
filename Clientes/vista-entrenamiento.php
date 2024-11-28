@@ -8,6 +8,72 @@
     <link rel="stylesheet" href="../CSS/indexmodi.css">
     <link rel="stylesheet" href="../CSS/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        /* Estilos con los colores indicados */
+        body {
+            background-color: rgba(51, 51, 51, 255); /* Color del fondo */
+            color: white; /* Color del texto */
+        }
+
+        header {
+            background-color: rgba(32, 33, 40, 255); /* Color del header */
+            color: white; /* Color del texto en el header */
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .prese h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            width: 80px;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        /* Tabla con fondo blanco y texto negro */
+        table {
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: rgba(32, 33, 40, 255);
+            color: black;
+        }
+
+        td {
+            background-color: white;
+        }
+
+        .alert {
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        /* Botón gris */
+        .btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            background-color: #5a6268;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,7 +130,7 @@
             <!-- Mostrar los entrenamientos -->
             <div class="d-flex justify-content-between mt-4">
                 <h3>Lista de Entrenamientos</h3>
-                <a href="../clientes/listarClientes.php" class="btn btn-primary">VOLVER</a>
+                <a href="../clientes/listarClientes.php" class="btn btn-secondary">VOLVER</a>
             </div>
 
             <table class="table table-striped mt-3">
